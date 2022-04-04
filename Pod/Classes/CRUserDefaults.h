@@ -41,6 +41,13 @@
 @interface CRUserDefaults : NSObject
 
 /**
+ * Property for communicating any error received when updating or reading stored user default
+ * values.
+ * @return Error object (if any) after reading or setting a value.
+ */
+@property (nonatomic, strong) NSError *storageError;
+
+/**
  *  Create a singleton instance of CRUserDefaults
  *
  *  @return A current CRUserDefaults instance
@@ -53,5 +60,18 @@
  */
 + (void) save;
 
+/**
+ * Allows adding all properties' types as supported classes for secure storage.
+ * @param class      Custom class to process to get all member types.
+ */
+- (void)addSupportedClassesForClass:(Class)class;
+
+/**
+ * Allows adding specific supported classes that cannot be detected just by traversing
+ * a given child class.
+ *
+ * @param classes  Array containing specific classes to be supported.
+ */
+- (void)addSupportedClasses:(NSArray *)classes;
 
 @end
